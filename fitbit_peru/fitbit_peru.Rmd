@@ -1,0 +1,59 @@
+---
+title: "Fitbit and geomtextpath"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(geomtextpath)
+library(scales)
+```
+
+
+```{r}
+df <- read_csv('fitbit_export_20221211.csv')
+```
+
+```{r}
+(df <- df %>%
+  select(Date, `Minutes Sedentary`, `Minutes Lightly Active`, `Minutes Very Active`) %>% 
+  gather(activity_type, val, 2:4))
+```
+
+```{r my.theme, include=TRUE}
+my.theme <- theme(
+  plot.title = element_text(family="Helvetica", color="black", face="bold", size=24, hjust=0), 
+  plot.subtitle = element_text(family="Helvetica", color="black", size=12, hjust=0), 
+  axis.title = element_text(family="Helvetica", color="black", face="bold", size=12), 
+  axis.text = element_text(family="Helvetica", color="black", size=18), 
+  axis.ticks.y = element_blank(), 
+  plot.caption = element_text(family="Helvetica", color="black", size=12), 
+  plot.background = element_rect(fill = "#F7F7F7", colour = NA),
+  panel.background =  element_rect(fill = "#F7F7F7", colour = NA), 
+  legend.background = element_rect(fill = "#F7F7F7", colour = NA), 
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.border = element_blank(), 
+  legend.title=element_blank(), 
+  legend.text = element_text(family="Helvetica", color="black", size=12, hjust=0),
+  legend.position = 'top',
+  strip.text = element_text(family="Helvetica", color="black", size=14))
+```
+
+
+
+```{r fig.height=3}
+df %>% 
+  ggplot(.,
+         aes(x=Date,
+             y=val,
+             color=activity_type)) + 
+  geomtextpath::geom_textline(aes(label=activity_type)) + 
+  scale_y_continuous(labels = comma) + 
+  labs(x='',
+       y='Minutes') + 
+  my.theme + 
+  theme(legend.position = 'none')
+```
+
+
