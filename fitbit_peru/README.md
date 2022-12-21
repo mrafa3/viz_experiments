@@ -12,4 +12,4 @@ Some highlights:
 
 ## Visualization  
 
-![]()
+![](https://github.com/mrafa3/viz_experiments/blob/main/fitbit_peru/graphics/fitbit_peru.png)
