@@ -47,7 +47,6 @@ my.theme <- theme(
   axis.title = element_text(color="black", face="bold", size=12), 
   axis.text = element_text(color="black", size=18), 
   axis.ticks.y = element_blank(), 
-  plot.background = element_blank(),
   panel.background = element_blank(),
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(),
@@ -103,5 +102,5 @@ viz_colors <- c('Minutes Very Active' = '#66c2a5',
 
 ```{r save_plot, include=TRUE}
 ggsave("graphics/fitbit_peru.png", fitbit_plot,
-       bg = 'white', width = 10, height = 6.5, dpi = 300)
+       width = 10, height = 6.5, dpi = 300)
 ```
