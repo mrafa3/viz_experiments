@@ -103,5 +103,5 @@ viz_colors <- c('Minutes Very Active' = '#66c2a5',
 
 ```{r save_plot, include=TRUE}
 ggsave("graphics/fitbit_peru.png", fitbit_plot,
-       width = 10, height = 6.5, dpi = 300)
+       bg = 'white', width = 10, height = 6.5, dpi = 300)
 ```
