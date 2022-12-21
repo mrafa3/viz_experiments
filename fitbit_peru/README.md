@@ -8,7 +8,7 @@ Largely replicating the plot done [here](https://github.com/tashapiro/tanya-data
 
 Some highlights:
 
-*  
+*  Learned how to use ``ggtext::element_textbox_simple()` to use HTML tags in text, which unlocks color legends within titles and icons for personal accounts in the caption.
 
 ## Visualization  
 

@@ -1,20 +1,38 @@
 ---
-title: "Fitbit and geomtextpath"
+title: "Fitbit and ggtext"
 output: html_notebook
 ---
 
-```{r}
+```{r setup, include=TRUE}
 library(tidyverse)
-library(geomtextpath)
 library(scales)
+library(ggtext)
+library(htmltools)
+library(sysfonts)
+library(showtext)
 ```
 
+```{r font_add, include=TRUE}
+# First argument = name in R
+# Second argument = path to .otf-file
+font_add('fa-reg', 'fonts/Font Awesome 6 Free-Regular-400.otf')
+font_add('fa-brands', 'fonts/Font Awesome 6 Brands-Regular-400.otf')
+font_add('fa-solid', 'fonts/Font Awesome 6 Free-Solid-900.otf')
+```
 
-```{r}
+```{r showtext, include=TRUE}
+sysfonts::font_add_google("Barlow","barlow")
+showtext::showtext_auto()
+showtext::showtext_opts(dpi=300)
+```
+
+```{r read_data, include=TRUE}
 df <- read_csv('fitbit_export_20221211.csv')
 ```
 
-```{r}
+# Data Prep
+
+```{r data_prep, include=TRUE}
 (df <- df %>%
   select(Date, `Minutes Sedentary`, `Minutes Lightly Active`, `Minutes Very Active`) %>% 
   gather(activity_type, val, 2:4))
@@ -22,38 +40,68 @@ df <- read_csv('fitbit_export_20221211.csv')
 
 ```{r my.theme, include=TRUE}
 my.theme <- theme(
-  plot.title = element_text(family="Helvetica", color="black", face="bold", size=24, hjust=0), 
-  plot.subtitle = element_text(family="Helvetica", color="black", size=12, hjust=0), 
-  axis.title = element_text(family="Helvetica", color="black", face="bold", size=12), 
-  axis.text = element_text(family="Helvetica", color="black", size=18), 
+  plot.title = ggtext::element_textbox_simple(face="bold", size=24, margin=margin(b=5)),
+  plot.subtitle = ggtext::element_textbox_simple(color="#444444", size=14, 
+                                                       margin=margin(b=10)),
+  plot.caption = ggtext::element_textbox_simple(color="#444444"),
+  axis.title = element_text(color="black", face="bold", size=12), 
+  axis.text = element_text(color="black", size=18), 
   axis.ticks.y = element_blank(), 
-  plot.caption = element_text(family="Helvetica", color="black", size=12), 
-  plot.background = element_rect(fill = "#F7F7F7", colour = NA),
-  panel.background =  element_rect(fill = "#F7F7F7", colour = NA), 
-  legend.background = element_rect(fill = "#F7F7F7", colour = NA), 
+  plot.background = element_blank(),
+  panel.background = element_blank(),
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(),
   panel.border = element_blank(), 
   legend.title=element_blank(), 
-  legend.text = element_text(family="Helvetica", color="black", size=12, hjust=0),
+  legend.text = element_text(color="black", size=12, hjust=0),
   legend.position = 'top',
-  strip.text = element_text(family="Helvetica", color="black", size=14))
+  strip.text = element_text(color="black", size=14))
+```
+
+```{r viz_text, include=TRUE}
+title <- tagList(p("Personal Fitbit Activity: March 2015 Peru Trip"))
+
+subtitle <- tagList(span("**Very Active**", style='color:#20A39E;'),
+                    ", ",
+                    span("**Lightly Active**", style='color:#fc8d62'),
+                    ", or ",
+                    span("**Sedentary**", style='color:#8da0cb'))
+
+caption <- paste0("<span style='font-family:barlow;'>**Source**: Personal Fitbit data</span><br>",
+                "<span style='font-family:fa-brands;'>&#xf099;</span>",
+                 "<span style='font-family:barlow;'>@mickey.rafa</span>",
+                 "<span style='font-family:barlow;color:white;'>....</span>",
+                 "<span style='font-family:fa-brands;'>&#xf09b;</span>",
+                 "<span style='font-family:barlow;color:white;'>.</span>",
+                 "<span style='font-family:barlow;'>mrafa</span>")
+```
+
+```{r viz_colors, include=TRUE}
+viz_colors <- c('Minutes Very Active' = '#66c2a5', 
+                'Minutes Lightly Active' = '#fc8d62', 
+                'Minutes Sedentary' = '#8da0cb')
 ```
 
 
-
-```{r fig.height=3}
-df %>% 
+```{r plot_viz, fig.height=3}
+(fitbit_plot <- df %>% 
   ggplot(.,
          aes(x=Date,
              y=val,
              color=activity_type)) + 
-  geomtextpath::geom_textline(aes(label=activity_type)) + 
+  geom_line(size=2) + 
   scale_y_continuous(labels = comma) + 
+  scale_color_manual(values = viz_colors) + 
   labs(x='',
-       y='Minutes') + 
+       y='Minutes',
+       title=title,
+       subtitle = subtitle,
+       caption = caption) + 
   my.theme + 
-  theme(legend.position = 'none')
+  theme(legend.position = 'none'))
 ```
 
-
+```{r save_plot, include=TRUE}
+ggsave("graphics/fitbit_peru.png", fitbit_plot,
+       width = 10, height = 6.5, dpi = 300)
+```
