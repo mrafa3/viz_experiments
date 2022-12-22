@@ -155,7 +155,7 @@ goals_palette <- col_numeric(c("lightgreen", "darkgreen"),
   cols_label(flag_URL = ""))
 ```
 ```{r save_tbl1, include=TRUE}
-tbl_top_scorers %>% gtsave(filename = "graphics/tbl_top_scorers.html")
+tbl_top_scorers %>% gtsave(filename = "graphics/tbl_top_scorers.png")
 ```
 
 # Top scorers by confederation or continent
@@ -242,6 +242,6 @@ goals_palette <- col_numeric(c("lightgreen", "darkgreen"),
 ```
 
 ```{r save_tbl1, include=TRUE}
-tbl_scorers_by_confed %>% gtsave(filename = "graphics/tbl_scorers_by_confed.html")
+tbl_scorers_by_confed %>% gtsave(filename = "graphics/tbl_scorers_by_confed.png")
 ```
 

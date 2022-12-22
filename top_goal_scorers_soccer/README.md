@@ -17,6 +17,6 @@ To-do:
 
 ## Visualization  
 
-![](https://github.com/mrafa3/viz_experiments/blob/main/top_goal_scorers_soccer/graphics/tbl_top_scorers.html)
+![](https://github.com/mrafa3/viz_experiments/blob/main/top_goal_scorers_soccer/graphics/tbl_top_scorers.png)
 
-![](https://github.com/mrafa3/viz_experiments/blob/main/top_goal_scorers_soccer/graphics/tbl_scorers_by_confed.html)
+![](https://github.com/mrafa3/viz_experiments/blob/main/top_goal_scorers_soccer/graphics/tbl_scorers_by_confed.png)
