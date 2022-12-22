@@ -13,6 +13,7 @@ Some highlights:
 To-do:
 
 * I'd like to fix the flag issue for the Hungarian player (haven't figured out why `recode()` isn't working)
+* UEFA only showing four scorers, which I should fix
 * I think a table or graphic on goals per match would be really cool
 
 ## Visualization  
