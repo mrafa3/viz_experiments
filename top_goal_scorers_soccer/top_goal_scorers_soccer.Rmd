@@ -138,7 +138,7 @@ goals_palette <- col_numeric(c("lightgreen", "darkgreen"),
 
 
 ```{r}
-tbl_top_scorers %>% 
+(tbl_top_scorers <- tbl_top_scorers %>% 
     text_transform(
     #Apply a function to a column
     locations = cells_body(c(flag_URL)),
@@ -152,7 +152,10 @@ tbl_top_scorers %>%
   ) %>% 
   #Hide column header flag_URL and reduce width
   cols_width(c(flag_URL) ~ px(30)) %>% 
-  cols_label(flag_URL = "")
+  cols_label(flag_URL = ""))
+```
+```{r save_tbl1, include=TRUE}
+tbl_top_scorers %>% gtsave(filename = "graphics/tbl_top_scorers.html")
 ```
 
 # Top scorers by confederation or continent
@@ -174,11 +177,11 @@ goals_palette <- col_numeric(c("lightgreen", "darkgreen"),
 ```
 
 ```{r}
-df_scorers_by_confed %>% 
+(tbl_scorers_by_confed <- df_scorers_by_confed %>% 
   select(rank, player, flag_URL, nation, goals, caps, goalsper_match, confederation) %>% 
   filter(!is.na(goals)) %>% 
   gt(groupname_col = "confederation") %>% 
-    cols_label(rank = 'Rank',
+    cols_label(rank = 'Global Rank',
              player = 'Name',
              nation = 'Country',
              goals = 'Total Goals Scored',
@@ -235,58 +238,10 @@ df_scorers_by_confed %>%
   ) %>% 
   #Hide column header flag_URL and reduce width
   cols_width(c(flag_URL) ~ px(30)) %>% 
-  cols_label(flag_URL = "")
+  cols_label(flag_URL = ""))
 ```
 
-
-```{r my.theme, include=TRUE}
-my.theme <- theme(
-  plot.title = ggtext::element_textbox_simple(face="bold", size=24, margin=margin(b=5)),
-  plot.subtitle = ggtext::element_textbox_simple(color="#444444", size=14, 
-                                                       margin=margin(b=10)),
-  plot.caption = ggtext::element_textbox_simple(color="#444444"),
-  axis.title = element_text(color="black", face="bold", size=12), 
-  axis.text = element_text(color="black", size=18), 
-  axis.ticks.y = element_blank(), 
-  plot.background = element_rect(fill = 'white'),
-  panel.background = element_blank(),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  panel.border = element_blank(), 
-  legend.title=element_blank(), 
-  legend.text = element_text(color="black", size=12, hjust=0),
-  legend.position = 'top',
-  strip.text = element_text(color="black", size=14))
+```{r save_tbl1, include=TRUE}
+tbl_scorers_by_confed %>% gtsave(filename = "graphics/tbl_scorers_by_confed.html")
 ```
 
-```{r viz_text, include=TRUE}
-title <- tagList(p("Personal Fitbit Activity: March 2015 Peru Trip"))
-
-subtitle <- tagList(span("**Very Active**", style='color:#20A39E;'),
-                    ", ",
-                    span("**Lightly Active**", style='color:#fc8d62'),
-                    ", or ",
-                    span("**Sedentary**", style='color:#8da0cb'))
-
-caption <- paste0("<span style='font-family:barlow;'>**Source**: Personal Fitbit data</span><br>",
-                "<span style='font-family:fa-brands;'>&#xf099;</span>",
-                 "<span style='font-family:barlow;'>@mickey.rafa</span>",
-                 "<span style='font-family:barlow;color:white;'>....</span>",
-                 "<span style='font-family:fa-brands;'>&#xf09b;</span>",
-                 "<span style='font-family:barlow;color:white;'>.</span>",
-                 "<span style='font-family:barlow;'>mrafa</span>")
-```
-
-```{r viz_colors, include=TRUE}
-
-```
-
-
-```{r plot_viz, fig.height=3}
-
-```
-
-```{r save_plot, include=TRUE}
-ggsave("graphics/fitbit_peru.png", fitbit_plot,
-       width = 10, height = 6.5, dpi = 300)
-```
