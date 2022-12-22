@@ -1,0 +1,292 @@
+---
+title: "Top International Goal Scorers in Men's Soccer: Pull from Wikipedia"
+output: html_notebook
+---
+
+# Setup 
+
+```{r setup, include=TRUE}
+library(tidyverse)
+library(janitor)
+library(scales)
+library(ggtext)
+library(htmltools)
+library(sysfonts)
+library(showtext)
+library(rvest)
+library(gt)
+library(sysfonts)
+library(showtext)
+library(countrycode)
+```
+
+```{r font_add, include=TRUE}
+# First argument = name in R
+# Second argument = path to .otf-file
+font_add('fa-reg', 'fonts/Font Awesome 6 Free-Regular-400.otf')
+font_add('fa-brands', 'fonts/Font Awesome 6 Brands-Regular-400.otf')
+font_add('fa-solid', 'fonts/Font Awesome 6 Free-Solid-900.otf')
+```
+
+```{r showtext, include=TRUE}
+sysfonts::font_add_google("Barlow","barlow")
+showtext::showtext_auto()
+showtext::showtext_opts(dpi=300)
+```
+
+```{r flag_db, include=TRUE}
+flag_db <- read.csv("Country_Flags.csv") %>% 
+  #Convert country names into 3-letter country codes
+  mutate(Code = countrycode(sourcevar = Country, origin = "country.name", destination = "iso3c", warn = FALSE)) %>% 
+  select(Country, flag_URL = ImageURL)
+```
+
+# Scrape Wikipedia Data 
+
+```{r url, include=TRUE}
+url_goals <- 'https://en.wikipedia.org/wiki/List_of_men%27s_footballers_with_50_or_more_international_goals'
+```
+
+```{r scrape_wiki, include=TRUE}
+(raw <- url_goals %>%
+  rvest::read_html() %>%
+  rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div[1]/table[3]') %>% 
+  html_table() %>% 
+  .[[1]] %>% 
+  clean_names() %>% 
+  mutate_at(c("goals", "caps", "goalsper_match"), as.numeric) %>% 
+  left_join(flag_db, by = c('nation' = 'Country')) %>% 
+  select(flag_URL, everything()))
+```
+
+```{r}
+raw %>% 
+  mutate(nation = recode(nation,
+                         `Hungary Spain` = "Hungary"))
+```
+
+
+```{r join_flag_db, include=TRUE}
+df_top_scorers <- raw %>% 
+  slice(1:12)
+```
+
+
+# Data Prep
+
+First, I'll extract the min and max values from the table for conditional formatting of the table.
+
+```{r min_max_goals, include=TRUE}
+min_goals <- df_top_scorers$goals %>% min()
+max_goals <- df_top_scorers$goals %>% max()
+
+goals_palette <- col_numeric(c("lightgreen", "darkgreen"), 
+                             domain = c(min_goals, max_goals), 
+                             alpha = .75)
+```
+
+```{r data_prep, include=TRUE}
+(tbl_top_scorers <- df_top_scorers %>% 
+  select(rank, player, flag_URL, nation, goals, caps, goalsper_match) %>% 
+  gt() %>% 
+  #rename columns
+  cols_label(rank = 'Rank',
+             player = 'Name',
+             nation = 'Country',
+             goals = 'Total Goals Scored',
+             caps = 'Matches',
+             goalsper_match = 'Goals per Match') %>% 
+  #add table title
+  tab_header(title = md("**Total Goals Scored in Men's International Soccer Matches**")) %>% 
+  tab_source_note(source_note = "Data from Wikipedia") %>% 
+  #apply new style to all column headers
+  tab_style(
+    locations = cells_column_labels(columns = everything()),
+    style = list(
+      #thick border
+      cell_borders(sides = "bottom", weight = px(3)),
+      #make text bold
+      cell_text(weight = "bold")
+    )
+  ) %>% 
+  #apply different style to title
+  tab_style(locations = cells_title(groups = "title"),
+            style = list(
+              cell_text(weight = "bold", size = 24)
+            )) %>% 
+  data_color(columns = c(goals),
+             colors = goals_palette) %>% 
+  opt_all_caps() %>% 
+  opt_table_font(
+    font = list(
+      google_font("Chivo"),
+      default_fonts()
+    )
+  ) %>% 
+  tab_options(
+    #remove border between column headers and title
+    column_labels.border.top.width = px(3),
+    column_labels.border.top.color = "transparent",
+    #remove border around the table
+    table.border.top.color = "transparent",
+    table.border.bottom.color = "transparent",
+    #adjust font sizes and alignment
+    source_notes.font.size = 12,
+    heading.align = "left"
+  ))
+```
+
+
+```{r}
+tbl_top_scorers %>% 
+    text_transform(
+    #Apply a function to a column
+    locations = cells_body(c(flag_URL)),
+    fn = function(x) {
+      #Return an image of set dimensions
+      web_image(
+        url = x,
+        height = 12
+      )
+    }
+  ) %>% 
+  #Hide column header flag_URL and reduce width
+  cols_width(c(flag_URL) ~ px(30)) %>% 
+  cols_label(flag_URL = "")
+```
+
+# Top scorers by confederation or continent
+
+```{r}
+(df_scorers_by_confed <- raw %>% 
+  filter(confederation != 'AFC / OFC[f]') %>% 
+  group_by(confederation) %>% 
+  slice(1:5))
+```
+
+```{r min_max_goals, include=TRUE}
+min_goals <- df_scorers_by_confed$goals %>% min(na.rm = TRUE)
+max_goals <- df_scorers_by_confed$goals %>% max(na.rm = TRUE)
+
+goals_palette <- col_numeric(c("lightgreen", "darkgreen"), 
+                             domain = c(min_goals, max_goals), 
+                             alpha = .75)
+```
+
+```{r}
+df_scorers_by_confed %>% 
+  select(rank, player, flag_URL, nation, goals, caps, goalsper_match, confederation) %>% 
+  filter(!is.na(goals)) %>% 
+  gt(groupname_col = "confederation") %>% 
+    cols_label(rank = 'Rank',
+             player = 'Name',
+             nation = 'Country',
+             goals = 'Total Goals Scored',
+             caps = 'Matches',
+             goalsper_match = 'Goals per Match') %>% 
+  #add table title
+  tab_header(title = md("**Total Goals Scored in Men's International Soccer Matches**")) %>% 
+  tab_source_note(source_note = "Data from Wikipedia") %>% 
+  #apply new style to all column headers
+  tab_style(
+    locations = cells_column_labels(columns = everything()),
+    style = list(
+      #thick border
+      cell_borders(sides = "bottom", weight = px(3)),
+      #make text bold
+      cell_text(weight = "bold")
+    )
+  ) %>% 
+  #apply different style to title
+  tab_style(locations = cells_title(groups = "title"),
+            style = list(
+              cell_text(weight = "bold", size = 24)
+            )) %>% 
+  data_color(columns = c(goals),
+             colors = goals_palette) %>% 
+  opt_all_caps() %>% 
+  opt_table_font(
+    font = list(
+      google_font("Chivo"),
+      default_fonts()
+    )
+  ) %>% 
+  tab_options(
+    #remove border between column headers and title
+    column_labels.border.top.width = px(3),
+    column_labels.border.top.color = "transparent",
+    #remove border around the table
+    table.border.top.color = "transparent",
+    table.border.bottom.color = "transparent",
+    #adjust font sizes and alignment
+    source_notes.font.size = 12,
+    heading.align = "left"
+  ) %>% 
+  text_transform(
+    #Apply a function to a column
+    locations = cells_body(c(flag_URL)),
+    fn = function(x) {
+      #Return an image of set dimensions
+      web_image(
+        url = x,
+        height = 12
+      )
+    }
+  ) %>% 
+  #Hide column header flag_URL and reduce width
+  cols_width(c(flag_URL) ~ px(30)) %>% 
+  cols_label(flag_URL = "")
+```
+
+
+```{r my.theme, include=TRUE}
+my.theme <- theme(
+  plot.title = ggtext::element_textbox_simple(face="bold", size=24, margin=margin(b=5)),
+  plot.subtitle = ggtext::element_textbox_simple(color="#444444", size=14, 
+                                                       margin=margin(b=10)),
+  plot.caption = ggtext::element_textbox_simple(color="#444444"),
+  axis.title = element_text(color="black", face="bold", size=12), 
+  axis.text = element_text(color="black", size=18), 
+  axis.ticks.y = element_blank(), 
+  plot.background = element_rect(fill = 'white'),
+  panel.background = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.border = element_blank(), 
+  legend.title=element_blank(), 
+  legend.text = element_text(color="black", size=12, hjust=0),
+  legend.position = 'top',
+  strip.text = element_text(color="black", size=14))
+```
+
+```{r viz_text, include=TRUE}
+title <- tagList(p("Personal Fitbit Activity: March 2015 Peru Trip"))
+
+subtitle <- tagList(span("**Very Active**", style='color:#20A39E;'),
+                    ", ",
+                    span("**Lightly Active**", style='color:#fc8d62'),
+                    ", or ",
+                    span("**Sedentary**", style='color:#8da0cb'))
+
+caption <- paste0("<span style='font-family:barlow;'>**Source**: Personal Fitbit data</span><br>",
+                "<span style='font-family:fa-brands;'>&#xf099;</span>",
+                 "<span style='font-family:barlow;'>@mickey.rafa</span>",
+                 "<span style='font-family:barlow;color:white;'>....</span>",
+                 "<span style='font-family:fa-brands;'>&#xf09b;</span>",
+                 "<span style='font-family:barlow;color:white;'>.</span>",
+                 "<span style='font-family:barlow;'>mrafa</span>")
+```
+
+```{r viz_colors, include=TRUE}
+
+```
+
+
+```{r plot_viz, fig.height=3}
+
+```
+
+```{r save_plot, include=TRUE}
+ggsave("graphics/fitbit_peru.png", fitbit_plot,
+       width = 10, height = 6.5, dpi = 300)
+```
