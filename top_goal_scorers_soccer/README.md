@@ -1,6 +1,6 @@
 # Top International Goal Scorers in Men's Soccer: Pull from Wikipedia
 
-Inspired by (this)[https://github.com/tashapiro/tanya-data-viz/blob/main/tennis/womens-tennis.png] and [this](https://www.liamdbailey.com/post/making-beautiful-tables-with-gt/), I wanted to revisit building tables in R, specifically with the `gt::` package. I scraped data on top all-time international goal scorers in men's soccer from Wikipedia for the data.
+Inspired by [this](https://github.com/tashapiro/tanya-data-viz/blob/main/tennis/womens-tennis.png) and [this](https://www.liamdbailey.com/post/making-beautiful-tables-with-gt/), I wanted to revisit building tables in R, specifically with the `gt::` package. I scraped data on top all-time international goal scorers in men's soccer from Wikipedia for the data.
 
 ## Notes  
 
@@ -17,6 +17,6 @@ To-do:
 
 ## Visualization  
 
-![]()
+![](https://github.com/mrafa3/viz_experiments/blob/main/top_goal_scorers_soccer/graphics/tbl_top_scorers.html)
 
-![]()
+![](https://github.com/mrafa3/viz_experiments/blob/main/top_goal_scorers_soccer/graphics/tbl_scorers_by_confed.html)
