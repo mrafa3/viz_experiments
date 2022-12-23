@@ -16,7 +16,7 @@ To-do:
 [x] I should add in the periods that they played.
 [] I should try to get the country label centered over the flags.
 [] I could experiment with adding player images in the table.
-[] UEFA only showing four scorers, which I should fix
+[x] UEFA only showing four scorers, which I should fix
 [] I think a table or graphic on goals per match would be really cool
 
 ## Visualization  
