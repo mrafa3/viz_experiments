@@ -168,6 +168,7 @@ tbl_top_scorers %>% gtsave(filename = "graphics/tbl_top_scorers.png")
 ```{r}
 (df_scorers_by_confed <- raw %>% 
   filter(confederation != 'AFC / OFC[f]') %>% 
+  filter(!is.na(goals)) %>% 
   group_by(confederation) %>% 
   slice(1:5))
 ```
@@ -184,7 +185,6 @@ goals_palette <- col_numeric(c("lightgreen", "darkgreen"),
 ```{r}
 (tbl_scorers_by_confed <- df_scorers_by_confed %>% 
   select(rank, player, career_span, flag_URL, nation, goals, caps, goalsper_match, confederation) %>% 
-  filter(!is.na(goals)) %>% 
   gt(groupname_col = "confederation") %>% 
     cols_label(rank = 'Global Rank',
              player = 'Name',
