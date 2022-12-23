@@ -12,10 +12,10 @@ Some highlights:
 
 To-do:
 
-- []  I'd like to fix the flag issue for the Hungarian player (haven't figured out why `recode()` isn't working)
-- []  I should try to get the country label centered over the flags.
-- []  I could experiment with adding player images in the table.
-- []  I think a table or graphic on goals per match would be really cool
+-  [ ]  I'd like to fix the flag issue for the Hungarian player (haven't figured out why `recode()` isn't working)
+-  [ ]  I should try to get the country label centered over the flags.
+-  [ ]  I could experiment with adding player images in the table.
+-  [ ]  I think a table or graphic on goals per match would be really cool
 -  [x]  ~~I should add in the periods that they played.~~
 -  [x]  ~~UEFA only showing four scorers, which I should fix~~
 
