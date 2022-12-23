@@ -23,15 +23,15 @@ library(countrycode)
 ```{r font_add, include=TRUE}
 # First argument = name in R
 # Second argument = path to .otf-file
-font_add('fa-reg', 'fonts/Font Awesome 6 Free-Regular-400.otf')
-font_add('fa-brands', 'fonts/Font Awesome 6 Brands-Regular-400.otf')
-font_add('fa-solid', 'fonts/Font Awesome 6 Free-Solid-900.otf')
+#font_add('fa-reg', 'fonts/Font Awesome 6 Free-Regular-400.otf')
+#font_add('fa-brands', 'fonts/Font Awesome 6 Brands-Regular-400.otf')
+#font_add('fa-solid', 'fonts/Font Awesome 6 Free-Solid-900.otf')
 ```
 
 ```{r showtext, include=TRUE}
-sysfonts::font_add_google("Barlow","barlow")
-showtext::showtext_auto()
-showtext::showtext_opts(dpi=300)
+#sysfonts::font_add_google("Barlow","barlow")
+#showtext::showtext_auto()
+#showtext::showtext_opts(dpi=300)
 ```
 
 ```{r flag_db, include=TRUE}
@@ -66,15 +66,19 @@ raw %>%
 ```
 
 
+
+
+
+# Data Prep
+
+First, I'll choose the top 12 scorers.
+
 ```{r join_flag_db, include=TRUE}
 df_top_scorers <- raw %>% 
   slice(1:12)
 ```
 
-
-# Data Prep
-
-First, I'll extract the min and max values from the table for conditional formatting of the table.
+Then, I'll extract the min and max values from the table for conditional formatting of the table.
 
 ```{r min_max_goals, include=TRUE}
 min_goals <- df_top_scorers$goals %>% min()
@@ -87,11 +91,12 @@ goals_palette <- col_numeric(c("lightgreen", "darkgreen"),
 
 ```{r data_prep, include=TRUE}
 (tbl_top_scorers <- df_top_scorers %>% 
-  select(rank, player, flag_URL, nation, goals, caps, goalsper_match) %>% 
+  select(rank, player, career_span, flag_URL, nation, goals, caps, goalsper_match) %>% 
   gt() %>% 
   #rename columns
   cols_label(rank = 'Rank',
              player = 'Name',
+             career_span = 'Career Span',
              nation = 'Country',
              goals = 'Total Goals Scored',
              caps = 'Matches',
@@ -178,11 +183,12 @@ goals_palette <- col_numeric(c("lightgreen", "darkgreen"),
 
 ```{r}
 (tbl_scorers_by_confed <- df_scorers_by_confed %>% 
-  select(rank, player, flag_URL, nation, goals, caps, goalsper_match, confederation) %>% 
+  select(rank, player, career_span, flag_URL, nation, goals, caps, goalsper_match, confederation) %>% 
   filter(!is.na(goals)) %>% 
   gt(groupname_col = "confederation") %>% 
     cols_label(rank = 'Global Rank',
              player = 'Name',
+             career_span = 'Career Span',
              nation = 'Country',
              goals = 'Total Goals Scored',
              caps = 'Matches',
