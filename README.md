@@ -7,3 +7,4 @@ To explore:
 * FIFA TidyTuesday scatterplot that uses (flags for the points)[https://github.com/doehm/tidytues/blob/main/scripts/2022/week%2048%20FIFA%20world%20cup/FIFA%20world%20cup.R]
 * Annual Google trends (ridgeplot)[https://github.com/bydata/news_cycle_2022_de_google_trends]
 * Explore [gghighlight::](https://yutannihilation.github.io/gghighlight/articles/gghighlight.html)
+* [This](https://albert-rapp.de/posts/ggplot2-tips/12_a_few_gg_packages/12_a_few_gg_packages.html#bump-charts) for bump charts, ggchicklet::, and camcorder::
