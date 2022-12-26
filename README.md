@@ -8,3 +8,4 @@ To explore:
 * Annual Google trends (ridgeplot)[https://github.com/bydata/news_cycle_2022_de_google_trends]
 * Explore [gghighlight::](https://yutannihilation.github.io/gghighlight/articles/gghighlight.html)
 * [This](https://albert-rapp.de/posts/ggplot2-tips/12_a_few_gg_packages/12_a_few_gg_packages.html#bump-charts) for bump charts, ggchicklet::, and camcorder::
+* I'd like to use 'rayshader::' ((example))[https://github.com/Pecners/rayshader_portraits] to build some population density maps ((data source))[https://data.humdata.org/m/dataset/kontur-population-dataset?] and I'd love to use a picture that I took in Uganda to extract a color palette
