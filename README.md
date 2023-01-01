@@ -12,6 +12,7 @@ To explore:
 * [This](https://github.com/camartinezbu/tidytuesday/blob/main/2022/2022-week49/plot_w49.R) for a nice rayshader:: example
 * [This](https://github.com/doehm/tidytues/blob/main/scripts/2022/week%2052%20star%20trek/star%20trek.R) seems like a simpler way to render icons and fonts in text
 * [This](https://milospopovic.net/crisp-topography-map-with-r/) is a great mapping tutorial
+* Need to learn Alt Text
 
 Project ideas:
 
