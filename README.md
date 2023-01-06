@@ -12,8 +12,9 @@ To explore:
 * [This](https://github.com/camartinezbu/tidytuesday/blob/main/2022/2022-week49/plot_w49.R) for a nice rayshader:: example
 * [This](https://github.com/doehm/tidytues/blob/main/scripts/2022/week%2052%20star%20trek/star%20trek.R) seems like a simpler way to render icons and fonts in text
 * [This](https://milospopovic.net/crisp-topography-map-with-r/) is a great mapping tutorial
-* Need to learn Alt Text
+* ~~Need to learn Alt Text~~
 * [This](https://www.business-science.io/r/2021/07/22/ggdist-raincloud-plots.html?utm_content=buffer4ad38&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer) to try a rain cloud plot.
+* [voteogram](https://t.co/KYUccl35HA) for Congressional vote data
 
 Project ideas:
 
