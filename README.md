@@ -18,7 +18,7 @@ To explore:
 
 Project ideas:
 
-* I'd like to use 'rayshader::' ([example](https://github.com/Pecners/rayshader_portraits) to build some population density maps ([data source](https://data.humdata.org/m/dataset/kontur-population-dataset?)) and I'd love to use a picture that I took in Uganda to extract a color palette (see the [eyedropper](http://gradientdescending.com/select-colours-from-an-image-in-r-with-eyedropper/?utm_source=rss&utm_medium=rss&utm_campaign=select-colours-from-an-image-in-r-with-eyedropper) package)
+* I'd like to use 'rayshader::' ([example](https://github.com/Pecners/rayshader_portraits) and [here](https://m.youtube.com/watch?v=8NV5MxcaWR4)) to build some population density maps ([data source](https://data.humdata.org/m/dataset/kontur-population-dataset?)) and I'd love to use a picture that I took in Uganda to extract a color palette (see the [eyedropper](http://gradientdescending.com/select-colours-from-an-image-in-r-with-eyedropper/?utm_source=rss&utm_medium=rss&utm_campaign=select-colours-from-an-image-in-r-with-eyedropper) package)
 * It would be fun to do a time-lapsed viz of Denver crimes since kickoff of Suoer Bowl Sunday nights, comparing crimes on the night of the loss and the night of the win. Are there dramatically different crime patterns?
 * I'd like to try a circular visualization of Myles' Huckleberry data from his first year of sleep
 * Something with 14ers would be fun (the above tutorial is about topo maps).
