@@ -14,7 +14,7 @@ To explore:
 * [This](https://milospopovic.net/crisp-topography-map-with-r/) is a great mapping tutorial
 * ~~Need to learn Alt Text~~
 * [This](https://www.business-science.io/r/2021/07/22/ggdist-raincloud-plots.html?utm_content=buffer4ad38&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer) to try a rain cloud plot.
-* [voteogram](https://t.co/KYUccl35HA) for Congressional vote data
+* [voteogram](https://t.co/KYUccl35HA) for Congressional vote data, and this [example](https://github.com/tashapiro/tanya-data-viz/blob/main/soth-election/scripts/soth-election.R) uses 'ggsankey::'
 
 Project ideas:
 
