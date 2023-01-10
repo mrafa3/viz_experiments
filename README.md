@@ -9,7 +9,7 @@ To explore:
 * Explore [gghighlight::](https://yutannihilation.github.io/gghighlight/articles/gghighlight.html)
 * [This](https://albert-rapp.de/posts/ggplot2-tips/12_a_few_gg_packages/12_a_few_gg_packages.html#bump-charts) for bump charts, ggchicklet::, and camcorder::
 * [This](https://github.com/SidhuK/TidyTuesday/blob/main/2022/38_December_27/starTrek.R) for code of waffle plot
-* [This](https://github.com/camartinezbu/tidytuesday/blob/main/2022/2022-week49/plot_w49.R) for a nice rayshader:: example
+* [This](https://github.com/camartinezbu/tidytuesday/blob/main/2022/2022-week49/plot_w49.R) for a nice rayshader:: example. [Here](https://www.youtube.com/@MrPecners) is a video.
 * [This](https://github.com/doehm/tidytues/blob/main/scripts/2022/week%2052%20star%20trek/star%20trek.R) seems like a simpler way to render icons and fonts in text
 * [This](https://milospopovic.net/crisp-topography-map-with-r/) is a great mapping tutorial
 * ~~Need to learn Alt Text~~
