@@ -16,6 +16,7 @@ To explore:
 * [This](https://www.business-science.io/r/2021/07/22/ggdist-raincloud-plots.html?utm_content=buffer4ad38&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer) to try a rain cloud plot.
 * [voteogram](https://t.co/KYUccl35HA) for Congressional vote data, and this [example](https://github.com/tashapiro/tanya-data-viz/blob/main/soth-election/scripts/soth-election.R) uses 'ggsankey::'
 * [This](https://github.com/aliciaoberholzer/TidyTuesday/blob/main/Week1.R) map with WDI data (I'd like to review an example of my own side-by-side for ideas).
+* Love the aesthetic of [this rayshader::](https://github.com/Pecners/rayshader_portraits/blob/main/R/portraits/stl_mke/render_graphic.R) population density of Milwaukee and St. Louis
 
 Project ideas:
 
