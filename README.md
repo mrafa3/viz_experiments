@@ -27,4 +27,4 @@ Project ideas:
 * It would be fun to do a time-lapsed viz of Denver crimes since kickoff of Suoer Bowl Sunday nights, comparing crimes on the night of the loss and the night of the win. Are there dramatically different crime patterns?
 * I'd like to try a circular visualization of Myles' Huckleberry data from his first year of sleep
 * Something with 14ers would be fun (the above tutorial is about topo maps).
-* Take the NFLPA annual surveys and make a YoY bump chart of rankings.
+* Take the [NFLPA annual surveys](https://nflpa.com/pittsburgh-steelers-report-card-2024) and make a YoY bump chart of rankings.
