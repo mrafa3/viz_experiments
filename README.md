@@ -20,12 +20,12 @@ To explore:
 * Would like to use the [nflreadr::](https://nflreadr.nflverse.com/reference/load_nextgen_stats.html) package to get explore some Next Gen stats
 * [This](https://milospopovic.net/6-ways-to-map-population-with-r.r/) tutorial for mapping population density a number of ways
 * [This](https://github.com/gkaramanis/tidytuesday/tree/master/2024/2024-week_08) is a great treemap example with simple code.
-* [This](https://github.com/bydata/tidytuesday/blob/main/2022/27/R/adjectives-rental-posts.R) is a coolcombo chart of distributions.
+* [This](https://github.com/bydata/tidytuesday/blob/main/2022/27/R/adjectives-rental-posts.R) is a cool combo chart of distributions.
 
 Project ideas:
 
 * I'd like to use 'rayshader::' ([example](https://github.com/Pecners/rayshader_portraits) and [here](https://m.youtube.com/watch?v=8NV5MxcaWR4)) to build some population density maps ([data source](https://data.humdata.org/m/dataset/kontur-population-dataset?)) and I'd love to use a picture that I took in Uganda to extract a color palette (see the [eyedropper](http://gradientdescending.com/select-colours-from-an-image-in-r-with-eyedropper/?utm_source=rss&utm_medium=rss&utm_campaign=select-colours-from-an-image-in-r-with-eyedropper) package)
 * It would be fun to do a time-lapsed viz of Denver crimes since kickoff of Suoer Bowl Sunday nights, comparing crimes on the night of the loss and the night of the win. Are there dramatically different crime patterns?
-* I'd like to try a circular visualization of Myles' Huckleberry data from his first year of sleep
+* ~~I'd like to try a circular visualization of Myles' Huckleberry data from his first year of sleep~~
 * Something with 14ers would be fun (the above tutorial is about topo maps).
 * Take the [NFLPA annual surveys](https://nflpa.com/pittsburgh-steelers-report-card-2024) and make a YoY bump chart of rankings.
