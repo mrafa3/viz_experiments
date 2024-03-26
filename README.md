@@ -21,6 +21,7 @@ To explore:
 * [This](https://milospopovic.net/6-ways-to-map-population-with-r.r/) tutorial for mapping population density a number of ways
 * [This](https://github.com/gkaramanis/tidytuesday/tree/master/2024/2024-week_08) is a great treemap example with simple code.
 * [This](https://github.com/bydata/tidytuesday/blob/main/2022/27/R/adjectives-rental-posts.R) is a cool combo chart of distributions.
+* [Financial Times visual vocabulary](https://github.com/Financial-Times/chart-doctor/blob/main/visual-vocabulary/FT4schools_RGS.pdf)
 
 Project ideas:
 
