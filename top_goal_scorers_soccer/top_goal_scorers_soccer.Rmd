@@ -54,7 +54,10 @@ url_goals <- 'https://en.wikipedia.org/wiki/List_of_men%27s_footballers_with_50_
   html_table() %>% 
   .[[1]] %>% 
   clean_names() %>% 
-  mutate_at(c("goals", "caps", "goalsper_match"), as.numeric) %>% 
+  #remove footnotes and transform columns to numeric values
+  mutate_at(vars(goals, caps, goalsper_match), 
+            ~ as.numeric(str_remove(., "\\[.*\\]"))) %>% 
+  mutate(nation = str_replace(nation, "Hungary Spain", "Hungary")) %>% 
   left_join(flag_db, by = c('nation' = 'Country')) %>% 
   select(flag_URL, everything()))
 ```
