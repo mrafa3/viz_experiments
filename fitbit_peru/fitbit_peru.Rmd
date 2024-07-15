@@ -73,7 +73,7 @@ caption <- paste0("<span style='font-family:barlow;'>**Source**: Personal Fitbit
                  "<span style='font-family:barlow;color:white;'>....</span>",
                  "<span style='font-family:fa-brands;'>&#xf09b;</span>",
                  "<span style='font-family:barlow;color:white;'>.</span>",
-                 "<span style='font-family:barlow;'>mrafa</span>")
+                 "<span style='font-family:barlow;'>mrafa3</span>")
 ```
 
 ```{r viz_colors, include=TRUE}
