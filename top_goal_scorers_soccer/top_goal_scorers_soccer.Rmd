@@ -56,7 +56,12 @@ url_goals <- 'https://en.wikipedia.org/wiki/List_of_men%27s_footballers_with_50_
   clean_names() %>% 
   #Remove extra spaces in nation to clean this column
   mutate(nation = str_replace_all(str_trim(nation), "\\s+", " ")) %>%
-  mutate(nation = str_replace(nation, "^Hungary\\s+Spain$", "Hungary")) %>% 
+  mutate(nation = case_when(
+    str_detect(nation, "^Hungary\\s+Spain$") ~ "Hungary",
+    #recoding this as United Kingdom to bring in flag
+    str_detect(nation, "^England\\s+England\\s+amateurs$") ~ "United Kingdom",
+    TRUE ~ nation
+  )) %>%
   #remove footnotes and transform columns to numeric values
   mutate_at(vars(player, career_span, goals, caps, goalsper_match), 
             ~ str_remove(., "\\[.*\\]")) %>% 
