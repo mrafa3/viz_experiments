@@ -58,8 +58,10 @@ url_goals <- 'https://en.wikipedia.org/wiki/List_of_men%27s_footballers_with_50_
   mutate(nation = str_replace_all(str_trim(nation), "\\s+", " ")) %>%
   mutate(nation = str_replace(nation, "^Hungary\\s+Spain$", "Hungary")) %>% 
   #remove footnotes and transform columns to numeric values
+  mutate_at(vars(player, career_span, goals, caps, goalsper_match), 
+            ~ str_remove(., "\\[.*\\]")) %>% 
   mutate_at(vars(goals, caps, goalsper_match), 
-            ~ as.numeric(str_remove(., "\\[.*\\]"))) %>% 
+            as.numeric) %>% 
   left_join(flag_db, by = c('nation' = 'Country')) %>% 
   select(flag_URL, everything()))
 ```
@@ -179,7 +181,7 @@ tbl_top_scorers %>% gtsave(filename = "graphics/tbl_top_scorers.png")
   slice(1:5))
 ```
 
-```{r min_max_goals, include=TRUE}
+```{r min_max_goals2, include=TRUE}
 min_goals <- df_scorers_by_confed$goals %>% min(na.rm = TRUE)
 max_goals <- df_scorers_by_confed$goals %>% max(na.rm = TRUE)
 
@@ -253,7 +255,7 @@ goals_palette <- col_numeric(c("lightgreen", "darkgreen"),
   cols_label(flag_URL = ""))
 ```
 
-```{r save_tbl1, include=TRUE}
+```{r save_tbl2, include=TRUE}
 tbl_scorers_by_confed %>% gtsave(filename = "graphics/tbl_scorers_by_confed.png")
 ```
 
