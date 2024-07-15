@@ -50,7 +50,7 @@ url_goals <- 'https://en.wikipedia.org/wiki/List_of_men%27s_footballers_with_50_
 ```{r scrape_wiki, include=TRUE}
 (raw <- url_goals %>%
   rvest::read_html() %>%
-  rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div[1]/table[3]') %>% 
+  rvest::html_nodes(xpath='//*[@id="mw-content-text"]/div[1]/table[2]') %>% 
   html_table() %>% 
   .[[1]] %>% 
   clean_names() %>% 
