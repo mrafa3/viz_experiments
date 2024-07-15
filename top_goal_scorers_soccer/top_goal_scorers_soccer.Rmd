@@ -54,22 +54,25 @@ url_goals <- 'https://en.wikipedia.org/wiki/List_of_men%27s_footballers_with_50_
   html_table() %>% 
   .[[1]] %>% 
   clean_names() %>% 
+  #Remove extra spaces in nation to clean this column
+  mutate(nation = str_replace_all(str_trim(nation), "\\s+", " ")) %>%
+  mutate(nation = str_replace(nation, "^Hungary\\s+Spain$", "Hungary")) %>% 
   #remove footnotes and transform columns to numeric values
   mutate_at(vars(goals, caps, goalsper_match), 
             ~ as.numeric(str_remove(., "\\[.*\\]"))) %>% 
-  mutate(nation = str_replace(nation, "Hungary Spain", "Hungary")) %>% 
   left_join(flag_db, by = c('nation' = 'Country')) %>% 
   select(flag_URL, everything()))
 ```
 
-```{r}
-raw %>% 
-  mutate(nation = recode(nation,
-                         `Hungary Spain` = "Hungary"))
+I need to recode one of the confederation values so that it's clean for the by confederation table.
+
+```{r fix_confederation, include=TRUE}
+(raw <- raw %>% 
+  mutate(confederation = case_when(
+    confederation == "AFC / OFC[h]" ~ "AFC",
+    TRUE ~ confederation
+  )))
 ```
-
-
-
 
 
 # Data Prep
