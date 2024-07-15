@@ -3,7 +3,7 @@
 .RData
 .Ruserdata
 .DS_Store
-.Rproj
+*.Rproj
 *.csv
 *.nb.html
 *.numbers
